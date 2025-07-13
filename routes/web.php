@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TodoController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -13,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
+Route::resource('todos', TodoController::class)->except(['show', 'create', 'edit']);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
