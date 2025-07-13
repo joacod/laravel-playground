@@ -23,7 +23,7 @@ class TodoController extends Controller
             'description' => 'nullable|string',
         ]);
         Todo::create($validated);
-        return redirect()->route('todo.index')->with('success', 'Todo created successfully.');
+        return redirect()->route('todos.index')->with('success', 'Todo created successfully.');
     }
 
     public function update(Request $request, Todo $todo): RedirectResponse
@@ -34,12 +34,12 @@ class TodoController extends Controller
             'completed' => 'boolean',
         ]);
         $todo->update($validated);
-        return redirect()->route('todo.index')->with('success', 'Todo updated successfully.');
+        return redirect()->route('todos.index')->with('success', 'Todo updated successfully.');
     }
 
     public function destroy(Todo $todo): RedirectResponse
     {
         $todo->delete();
-        return redirect()->route('todo.index')->with('success', 'Todo deleted successfully.');
+        return redirect()->route('todos.index')->with('success', 'Todo deleted successfully.');
     }
 } 
