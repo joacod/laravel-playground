@@ -10,7 +10,8 @@ export default function Todo() {
         created_at: string;
         updated_at: string;
     };
-    const { todos, flash } = usePage().props as unknown as { todos: TodoType[]; flash?: { success?: string } };
+    const { todos, flash } = usePage().props as unknown as { todos: TodoType[]; flash?: { success?: string }; errors?: Record<string, string> };
+    const errors = (usePage().props as unknown as { errors?: Record<string, string> }).errors;
     const [form, setForm] = useState({ title: '', description: '' });
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editForm, setEditForm] = useState({ title: '', description: '', completed: false });
@@ -74,6 +75,7 @@ export default function Todo() {
                             className="w-full rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
                             required
                         />
+                        {errors?.title && <div className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.title}</div>}
                     </div>
                     <div className="mb-2">
                         <textarea
@@ -83,6 +85,7 @@ export default function Todo() {
                             placeholder="Description (optional)"
                             className="w-full rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
                         />
+                        {errors?.description && <div className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.description}</div>}
                     </div>
                     <button type="submit" className="rounded bg-blue-600 px-4 py-2 text-white dark:bg-blue-500 dark:hover:bg-blue-400">
                         Add Todo
@@ -104,12 +107,16 @@ export default function Todo() {
                                             className="rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
                                             required
                                         />
+                                        {errors?.title && <div className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.title}</div>}
                                         <textarea
                                             name="description"
                                             value={editForm.description}
                                             onChange={handleEditChange}
                                             className="rounded border p-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
                                         />
+                                        {errors?.description && (
+                                            <div className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.description}</div>
+                                        )}
                                         <label className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
