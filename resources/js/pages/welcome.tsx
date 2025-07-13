@@ -44,7 +44,7 @@ export default function Welcome() {
                             <h1 className="mb-1 font-medium">Welcome to Laravel Playground</h1>
                             <p className="mb-4">
                                 <Link
-                                    href="/todo"
+                                    href="/todos"
                                     className="inline-flex items-center space-x-1 font-medium text-[#f53003] underline underline-offset-4 dark:text-[#FF4433]"
                                 >
                                     <span>TODO app</span>
